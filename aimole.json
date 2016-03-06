@@ -1,0 +1,24 @@
+{
+  "name": "2048",
+  "description": "2048 game.",
+  "author": "",
+  "version": "1.0.0",
+  "viewUrl": "http://jjanicechen.github.io/aimole-2048/",
+  "players": 1,
+  "verdict": {
+    "file": "",
+    "language": ""
+  },
+  "ai": [
+    {
+      "name": "normalplayer",
+      "file": "ai/normalplayer.c",
+      "language": "c"
+    },
+    {
+      "name": "randomplayer",
+      "file": "ai/randomplayer.c",
+      "language": "c"
+    }
+  ]
+}
