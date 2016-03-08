@@ -11,13 +11,13 @@ var sass = require('gulp-sass');
 gulp.task('sass_main', function() {
     gulp.src('./src/css/main.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('sass_tile', function() {
     gulp.src('./src/css/tile.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('jsx', () => {
@@ -38,7 +38,7 @@ gulp.task('jsx', () => {
 						.bundle()
 						.on('error', err => { gutil.log(err.message); })
 						.pipe(source('bundle.js'))
-						.pipe(gulp.dest('./public'))
+						.pipe(gulp.dest('./dist'))
 						.pipe(livereload())
 						.on('end', () => { gutil.log('jsx completed.'); });
 		}
@@ -50,7 +50,7 @@ gulp.task('jsx', () => {
 
 gulp.task('static', () => {
 		gulp.src(['./src/index.html', './src/*.*'])
-				.pipe(gulp.dest('./public'));
+				.pipe(gulp.dest('./dist'));
 });
 
 gulp.task('watch', () => {
