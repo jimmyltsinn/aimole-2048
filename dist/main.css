@@ -5,7 +5,7 @@ body {
   align-content: center;
   align-items: center;
   font-family: "Clear Sans", sans-serif;
-  background-repeat: no-repeat; }
+  margin: 0}
 
 .title {
   order: 2;
