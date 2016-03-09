@@ -1,239 +1,287 @@
 .row_from_0_to_0 {
-    top: 1vh; }
+  top: 1vh; }
 
 .row_from_0_to_1 {
-    animation-duration: 0.30s;
-    animation-name: row_from_0_to_1;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_0_to_1;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_0_to_1 {
-    from {top: 1vh; }
-    to {top: 18vh; } }
+  from {
+    top: 1vh; }
+  to {
+    top: 18vh; } }
 
 .row_from_0_to_2 {
-    animation-duration: 0.30s;
-    animation-name: row_from_0_to_2;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_0_to_2;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_0_to_2 {
-    from {top: 1vh; }
-    to {top: 35vh; } }
+  from {
+    top: 1vh; }
+  to {
+    top: 35vh; } }
 
 .row_from_0_to_3 {
-    animation-duration: 0.30s;
-    animation-name: row_from_0_to_3;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_0_to_3;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_0_to_3 {
-    from {top: 1vh; }
-    to {top: 52vh; } }
+  from {
+    top: 1vh; }
+  to {
+    top: 52vh; } }
 
 .row_from_1_to_0 {
-    animation-duration: 0.30s;
-    animation-name: row_from_1_to_0;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_1_to_0;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_1_to_0 {
-    from {top: 18vh; }
-    to {top: 1vh; } }
+  from {
+    top: 18vh; }
+  to {
+    top: 1vh; } }
 
 .row_from_1_to_1 {
-    top: 18vh; }
+  top: 18vh; }
 
 .row_from_1_to_2 {
-    animation-duration: 0.30s;
-    animation-name: row_from_1_to_2;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_1_to_2;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_1_to_2 {
-    from {top: 18vh; }
-    to {top: 35vh; } }
+  from {
+    top: 18vh; }
+  to {
+    top: 35vh; } }
 
 .row_from_1_to_3 {
-    animation-duration: 0.30s;
-    animation-name: row_from_1_to_3;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_1_to_3;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_1_to_3 {
-    from {top: 18vh; }
-    to {top: 52vh; } }
+  from {
+    top: 18vh; }
+  to {
+    top: 52vh; } }
 
 .row_from_2_to_0 {
-    animation-duration: 0.30s;
-    animation-name: row_from_2_to_0;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_2_to_0;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_2_to_0 {
-    from {top: 35vh; }
-    to {top: 1vh; } }
+  from {
+    top: 35vh; }
+  to {
+    top: 1vh; } }
 
 .row_from_2_to_1 {
-    animation-duration: 0.30s;
-    animation-name: row_from_2_to_1;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_2_to_1;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_2_to_1 {
-    from {top: 35vh; }
-    to {top: 18vh; } }
+  from {
+    top: 35vh; }
+  to {
+    top: 18vh; } }
 
 .row_from_2_to_2 {
-    top: 35vh; }
+  top: 35vh; }
 
 .row_from_2_to_3 {
-    animation-duration: 0.30s;
-    animation-name: row_from_2_to_3;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_2_to_3;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_2_to_3 {
-    from {top: 35vh; }
-    to {top: 52vh; } }
+  from {
+    top: 35vh; }
+  to {
+    top: 52vh; } }
 
 .row_from_3_to_0 {
-    animation-duration: 0.30s;
-    animation-name: row_from_3_to_0;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_3_to_0;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_3_to_0 {
-    from {top: 52vh; }
-    to {top: 1vh; } }
+  from {
+    top: 52vh; }
+  to {
+    top: 1vh; } }
 
 .row_from_3_to_1 {
-    animation-duration: 0.30s;
-    animation-name: row_from_3_to_1;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_3_to_1;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_3_to_1 {
-    from {top: 52vh; }
-    to {top: 18vh; } }
+  from {
+    top: 52vh; }
+  to {
+    top: 18vh; } }
 
 .row_from_3_to_2 {
-    animation-duration: 0.30s;
-    animation-name: row_from_3_to_2;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: row_from_3_to_2;
+  animation-fill-mode: forwards; }
 
 @keyframes row_from_3_to_2 {
-    from {top: 52vh; }
-    to {top: 35vh; } }
+  from {
+    top: 52vh; }
+  to {
+    top: 35vh; } }
 
 .row_from_3_to_3 {
-    top: 52vh; }
+  top: 52vh; }
 
 .col_from_0_to_0 {
-    left: 1vh; }
+  left: 1vh; }
 
 .col_from_0_to_1 {
-    animation-duration: 0.30s;
-    animation-name: col_from_0_to_1;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_0_to_1;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_0_to_1 {
-    from {left: 1vh; }
-    to {left: 18vh; } }
+  from {
+    left: 1vh; }
+  to {
+    left: 18vh; } }
 
 .col_from_0_to_2 {
-    animation-duration: 0.30s;
-    animation-name: col_from_0_to_2;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_0_to_2;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_0_to_2 {
-    from {left: 1vh; }
-    to {left: 35vh; } }
+  from {
+    left: 1vh; }
+  to {
+    left: 35vh; } }
 
 .col_from_0_to_3 {
-    animation-duration: 0.30s;
-    animation-name: col_from_0_to_3;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_0_to_3;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_0_to_3 {
-    from {left: 1vh; }
-    to {left: 52vh; } }
+  from {
+    left: 1vh; }
+  to {
+    left: 52vh; } }
 
 .col_from_1_to_0 {
-    animation-duration: 0.30s;
-    animation-name: col_from_1_to_0;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_1_to_0;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_1_to_0 {
-    from {left: 18vh; }
-    to {left: 1vh; } }
+  from {
+    left: 18vh; }
+  to {
+    left: 1vh; } }
 
 .col_from_1_to_1 {
-    left: 18vh; }
+  left: 18vh; }
 
 .col_from_1_to_2 {
-    animation-duration: 0.30s;
-    animation-name: col_from_1_to_2;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_1_to_2;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_1_to_2 {
-    from {left: 18vh; }
-    to {left: 35vh; } }
+  from {
+    left: 18vh; }
+  to {
+    left: 35vh; } }
 
 .col_from_1_to_3 {
-    animation-duration: 0.30s;
-    animation-name: col_from_1_to_3;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_1_to_3;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_1_to_3 {
-    from {left: 18vh; }
-    to {left: 52vh; } }
+  from {
+    left: 18vh; }
+  to {
+    left: 52vh; } }
 
 .col_from_2_to_0 {
-    animation-duration: 0.30s;
-    animation-name: col_from_2_to_0;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_2_to_0;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_2_to_0 {
-    from {left: 35vh; }
-    to {left: 1vh; } }
+  from {
+    left: 35vh; }
+  to {
+    left: 1vh; } }
 
 .col_from_2_to_1 {
-    animation-duration: 0.30s;
-    animation-name: col_from_2_to_1;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_2_to_1;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_2_to_1 {
-    from {left: 35vh; }
-    to {left: 18vh; } }
+  from {
+    left: 35vh; }
+  to {
+    left: 18vh; } }
 
 .col_from_2_to_2 {
-    left: 35vh; }
+  left: 35vh; }
 
 .col_from_2_to_3 {
-    animation-duration: 0.30s;
-    animation-name: col_from_2_to_3;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_2_to_3;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_2_to_3 {
-    from {left: 35vh; }
-    to {left: 52vh; } }
+  from {
+    left: 35vh; }
+  to {
+    left: 52vh; } }
 
 .col_from_3_to_0 {
-    animation-duration: 0.30s;
-    animation-name: col_from_3_to_0;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_3_to_0;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_3_to_0 {
-    from {left: 52vh; }
-    to {left: 1vh; } }
+  from {
+    left: 52vh; }
+  to {
+    left: 1vh; } }
 
 .col_from_3_to_1 {
-    animation-duration: 0.30s;
-    animation-name: col_from_3_to_1;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_3_to_1;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_3_to_1 {
-    from {left: 52vh; }
-    to {left: 18vh; } }
+  from {
+    left: 52vh; }
+  to {
+    left: 18vh; } }
 
 .col_from_3_to_2 {
-    animation-duration: 0.30s;
-    animation-name: col_from_3_to_2;
-    animation-fill-mode: forwards; }
+  animation-duration: 0.25s;
+  animation-name: col_from_3_to_2;
+  animation-fill-mode: forwards; }
 
 @keyframes col_from_3_to_2 {
-    from {left: 52vh; }
-    to {left: 35vh; } }
+  from {
+    left: 52vh; }
+  to {
+    left: 35vh; } }
 
 .col_from_3_to_3 {
-    left: 52vh; }
+  left: 52vh; }

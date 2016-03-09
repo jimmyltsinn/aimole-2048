@@ -1,147 +1,143 @@
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    font-family: "Clear Sans", sans-serif;
-    background-color: #bedbae; }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  font-family: "Clear Sans", sans-serif;
+  background-repeat: no-repeat; }
 
 .title {
-    order: 2;
-    font-size: 6vh;
-    font-weight: bold; }
+  order: 2;
+  font-size: 6vh;
+  font-weight: bold; }
 
 .board {
-    order: 1;
-    width: 68vh;
-    height: 68vh;
-    padding: 1vh;
-    background-color: #566905;
-    border-radius: 1vh;
-    outline: none;
-    position: relative; }
+  order: 1;
+  width: 68vh;
+  height: 68vh;
+  padding: 1vh;
+  background-color: rgba(230, 230, 230, 0.2);
+  border-radius: 1vh;
+  outline: none;
+  position: relative; }
 
 .board .cell, .tile {
-    cursor: default; }
+  cursor: default; }
 
 .cell, .tile {
-    width: 15vh;
-    height: 15vh;
-    margin: 1vh;
-    line-height: 15vh;
-    display: inline-block;
-    float: left;
-    font-size: 6vh;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
-    border-radius: 1vh;
-    font-family: "Clear Sans";
-    color: #354203;
-    background-color: #667728; }
+  width: 15vh;
+  height: 15vh;
+  margin: 1vh;
+  line-height: 15vh;
+  display: inline-block;
+  float: left;
+  font-size: 6vh;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 1vh;
+  font-family: "Clear Sans";
+  color: #776E65;
+  background-color: rgba(230, 230, 230, 0.1); }
 
 .tile {
-    position: absolute; }
-
-.tile0 {
-    background-color: #dcb; }
+  position: absolute; }
 
 .tile2 {
-    background-color: #eeffcc; }
+  background-color: #EEE4DA; }
 
 .tile4 {
-    background-color: #dffa85; }
+  background-color: #EDE0C8; }
 
 .tile8 {
-    background-color: #bfff00; }
+  background-color: #F2B179; }
 
 .tile16 {
-    color: #f2ffe6;
-    background-color: #99cc00; }
+  color: #F9F6F2;
+  background-color: #F59563; }
 
 .tile32 {
-    color: #f2ffe6;
-    background-color: #7e8f13; }
+  color: #F9F6F2;
+  background-color: #F67C5F; }
 
 .tile64 {
-    color: #f2ffe6;
-    background-color: #2a4a02; }
+  color: #F9F6F2;
+  background-color: #F65E3B; }
 
 .tile128 {
-    color: #f2ffe6;
-    background-color: #355909;
-    font-size: 5vh; }
+  background-color: #edcf72;
+  font-size: 5vh; }
 
 .tile256 {
-    color: #f2ffe6;
-    background-color: #549405;
-    font-size: 5vh; }
+  background-color: #edc850;
+  font-size: 5vh; }
 
 .tile512 {
-    color: #354203;
-    background-color: #97f820;
-    font-size: 5vh; }
+  color: #F9F6F2;
+  background-color: #edc22e;
+  font-size: 5vh; }
 
 .tile1024 {
-    color: #354203;
-    background-color: #bdff66;
-    font-size: 5vh; }
+  color: #F9F6F2;
+  background-color: #EA8221;
+  font-size: 5vh; }
 
 .tile2048 {
-    color: #354203;
-    background-color: #f4fb23;
-    font-size: 5vh; }
+  background-color: #FCE5B2;
+  font-size: 5vh; }
 
 .tile4096 {
-    color: #354203;
-    background-color: #fff000;
-    font-size: 5vh; }
+  background-color: #FCC1A2;
+  font-size: 5vh; }
 
 .tile8192 {
-    color: #354203;
-    background-color: #c8cb1a;
-    font-size: 5vh; }
+  color: #F9F6F2;
+  background-color: #E19A9B;
+  font-size: 5vh; }
 
 .tile16384 {
-    color: #354203;
-    background-color: #f7f46e;
-    font-size: 5vh; }
+  color: #F9F6F2;
+  background-color: #9F7E8D;
+  font-size: 5vh; }
 
 .tile32768 {
-    color: #354203;
-    background-color: #f4fc9c;
-    font-size: 5vh; }
+  color: #F9F6F2;
+  background-color: #B082A2;
+  font-size: 5vh; }
 
 .tile65536 {
-    color: #354203;
-    background-color: #f4fc9c;
-    font-size: 5vh; }
+  background-color: #A385C1;
+  font-size: 5vh; }
 
 .tile131072 {
-    color: #354203;
-    background-color: #f4fc9c;
-    font-size: 5vh; }
+  background-color: #DFA4E8;
+  font-size: 5vh; }
 
 @keyframes newTile {
-    0% {transform: scale(0);}
-    100% {transform: scale(1);} }
+  0% {
+    transform: scale(0); }
+  100% {
+    transform: scale(1); } }
 
 .tile.new {
-    animation-duration: 0.20s;
-    animation-name: newTile;
-    animation-fill-mode: forwards;
-    animation-delay: 0.15s;
-    transform: scale(0); }
+  animation-duration: 0.15s;
+  animation-name: newTile;
+  animation-fill-mode: forwards;
+  animation-delay: 0.1s;
+  transform: scale(0); }
 
 @keyframes mergedTile {
-    0% {transform: scale(0);}
-    60% {transform: scale(1.05);}
-    100% {transform: scale(1);} }
+  0% {
+    transform: scale(0); }
+  60% {
+    transform: scale(1.1); }
+  100% {
+    transform: scale(1); } }
 
 .tile.merged {
-    animation-duration: 0.20s;
-    animation-name: mergedTile;
-    animation-fill-mode: forwards;
-    animation-delay: 0.15s;
-    transform: scale(0); }
+  animation-duration: 0.15s;
+  animation-name: mergedTile;
+  animation-fill-mode: forwards;
+  animation-delay: 0.15s;
+  transform: scale(0); }
