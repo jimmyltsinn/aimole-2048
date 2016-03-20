@@ -4,8 +4,11 @@ body {
   justify-content: center;
   align-content: center;
   align-items: center;
-  font-family: "Clear Sans", sans-serif;
-  margin: 0}
+  font-family: 'Ubuntu', sans-serif;
+  margin: 0; }
+
+img {
+  height: 30vh; }
 
 .title {
   order: 2;
@@ -13,7 +16,6 @@ body {
   font-weight: bold; }
 
 .board {
-  order: 1;
   width: 68vh;
   height: 68vh;
   padding: 1vh;
@@ -37,7 +39,7 @@ body {
   text-align: center;
   vertical-align: middle;
   border-radius: 1vh;
-  font-family: "Clear Sans";
+  font-family: 'Ubuntu', sans-serif;
   color: #776E65;
   background-color: rgba(230, 230, 230, 0.1); }
 

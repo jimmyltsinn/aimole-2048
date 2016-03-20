@@ -7,17 +7,24 @@ var gutil = require('gulp-util');
 var watch = require('gulp-watch');
 var livereload = require('gulp-livereload');
 var sass = require('gulp-sass');
+var image = require('gulp-image');
+
+gulp.task('image', function () {
+  gulp.src('./src/*.png')
+    .pipe(image())
+    .pipe(gulp.dest('public'));
+});
 
 gulp.task('sass_main', function() {
     gulp.src('./src/css/main.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('public'));
 });
 
 gulp.task('sass_tile', function() {
     gulp.src('./src/css/tile.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('public'));
 });
 
 gulp.task('jsx', () => {
@@ -38,7 +45,7 @@ gulp.task('jsx', () => {
 						.bundle()
 						.on('error', err => { gutil.log(err.message); })
 						.pipe(source('bundle.js'))
-						.pipe(gulp.dest('./dist'))
+						.pipe(gulp.dest('./public'))
 						.pipe(livereload())
 						.on('end', () => { gutil.log('jsx completed.'); });
 		}
@@ -50,11 +57,11 @@ gulp.task('jsx', () => {
 
 gulp.task('static', () => {
 		gulp.src(['./src/index.html', './src/*.*'])
-				.pipe(gulp.dest('./dist'));
+				.pipe(gulp.dest('./public'));
 });
 
 gulp.task('watch', () => {
 		watch(['./src/index.html', './src/*.*'], () => { gulp.start('static'); });
 });
 
-gulp.task('default', ['watch', 'jsx', 'static', 'sass_main', 'sass_tile']);
+gulp.task('default', ['watch', 'jsx', 'static', 'sass_main', 'sass_tile', 'image']);

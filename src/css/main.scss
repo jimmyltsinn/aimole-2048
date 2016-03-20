@@ -4,23 +4,24 @@ body {
   justify-content: center;
   align-content: center;
   align-items: center;
-  font-family: "Clear Sans", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   margin: 0}
-
+img {
+    height: 30vh;
+}
 .title {
   order: 2;
   font-size: 6vh;
   font-weight: bold; }
 
 .board {
-  order: 1;
   width: 68vh;
   height: 68vh;
   padding: 1vh;
   background-color: rgba(230, 230, 230, 0.2);
   border-radius: 1vh;
   outline: none;
-  position: relative; }
+  position: relative;}
 
 .board .cell, .tile {
   cursor: default; }
@@ -37,7 +38,7 @@ body {
   text-align: center;
   vertical-align: middle;
   border-radius: 1vh;
-  font-family: "Clear Sans";
+  font-family: 'Ubuntu', sans-serif;
   color: #776E65;
   background-color: rgba(230, 230, 230, 0.1)
 }
