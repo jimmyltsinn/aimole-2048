@@ -154,6 +154,8 @@ class App extends React.Component {
             mergedTile: [],
             tiles: [[],[],[],[]],
             cells: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+            score: 0,
+            movement: 0,
             data: [],
             submitted: false,
             currentFrame: 0,
@@ -208,8 +210,8 @@ class App extends React.Component {
         for (var i = 0; i < 4; ++i) {
             currentTiles.push([]);
             for (var j = 0; j < 4; ++j) {
-                if (i == this.state.data[newFrame].newTile[1]
-                    && j == this.state.data[newFrame].newTile[0]) {
+                if (i == this.state.data[newFrame].newTile[0]
+                    && j == this.state.data[newFrame].newTile[1]) {
                     currentTiles[i][j] = new Tile(this.state.data[newFrame].board[i][j], i, j, 1);
                 }
                 else {
@@ -221,6 +223,8 @@ class App extends React.Component {
             currentFrame: newFrame,
             cells: this.state.data[newFrame].board,
             tiles: currentTiles,
+            score: this.state.data[newFrame].score,
+            movement: this.state.data[newFrame + 1].movement,
             mergedTile: []
         });
     };
@@ -229,7 +233,10 @@ class App extends React.Component {
             <div style={styles.main}>
                 <BoardView cells={this.state.cells}
                            tiles={this.state.tiles}
-                           mergedTiles={this.state.mergedTile}/>
+                           mergedTiles={this.state.mergedTile}
+                           score={this.state.score}
+                           movement={this.state.movement}
+                           currentFrame={this.state.currentFrame}/>
                 <Player
                     cells={this.state.cells}
                     data={this.state.data}

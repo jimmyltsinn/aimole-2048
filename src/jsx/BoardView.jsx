@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery-browserify';
+import MediaQuery from 'react-responsive';
 import CellView from './CellView.jsx';
 import TileView from './TileView.jsx';
 import Board from './Board.jsx';
+import InfoBar from './InfoBar.jsx';
 
 const styles = {
     main: {
         height: 'calc(100vh - 60px)',
         width: '100vw',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 };
 
@@ -40,6 +43,12 @@ export default class BoardView extends React.Component {
                     {tileViews}
                     {mergedTile}
                 </div>
+                <MediaQuery minHeight={500}>
+                    <InfoBar score={this.props.score}
+                             movement={this.props.movement}
+                             currentFrame={this.props.currentFrame}>
+                    </InfoBar>
+                </MediaQuery>
             </div>
         );
     }
