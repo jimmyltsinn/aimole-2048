@@ -4,11 +4,15 @@ body {
   justify-content: center;
   align-content: center;
   align-items: center;
+  overflow-x: hidden;
   font-family: 'Ubuntu', sans-serif;
   margin: 0; }
 
 img {
   height: 30vh; }
+
+::-webkit-scrollbar {
+  display: none; }
 
 .title {
   order: 2;
