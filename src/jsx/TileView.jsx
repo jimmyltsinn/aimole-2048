@@ -1,6 +1,5 @@
 import React from 'react';
 import $ from 'jquery-browserify';
-import {Motion, spring} from 'react-motion';
 
 export default class TileView extends React.Component {
     render() {

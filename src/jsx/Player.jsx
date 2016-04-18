@@ -1,13 +1,17 @@
 import React from 'react';
-import {Paper, FloatingActionButton, FontIcon, IconButton, Slider, Dialog} from 'material-ui';
 import _ from 'lodash';
+import $ from 'jquery-browserify';
 import marked from 'marked';
+
+import {Paper, FloatingActionButton, FontIcon, IconButton, Slider, Dialog} from 'material-ui';
 import spec from './spec.js';
+
+import { connect } from 'react-redux';
+import { fetchData, setCurrentFrame, setPlay, moveTiles } from '../redux/actions.js';
 
 const styles = {
     player: {
-        height: '60px',
-        padding: '10px',
+        padding: '5px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
@@ -41,9 +45,9 @@ const styles = {
     }
 };
 
-var first = true;
+let firstChange = true;
 
-export default class Player extends React.Component {
+class Player extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,6 +61,16 @@ export default class Player extends React.Component {
             'handleSpecToggle'
         ]);
     }
+    componentWillMount() {
+        this.props.fetchData();
+        this.props.setPlay(true);
+        this.props.setCurrentFrame(this.props.currentFrame);
+        setTimeout(() => {
+            if (this.props.currentFrame < this.props.totalFrame - 1) {
+                this.props.moveTiles(this.props.data[this.props.currentFrame + 1].movement);
+            }
+        }, 300);
+    }
     handlePrev() {
         this.props.setCurrentFrame(this.props.currentFrame - 1);
         this.props.setPlay(false);
@@ -66,8 +80,13 @@ export default class Player extends React.Component {
         this.props.setPlay(false);
     }
     handlePlay() {
-        first = true;
+        firstChange = true;
         this.props.setPlay(!this.props.playing);
+        setTimeout(() => {
+            if (this.props.currentFrame < this.props.totalFrame - 1) {
+                this.props.moveTiles(this.props.data[this.props.currentFrame + 1].movement);
+            }
+        }, 300);
     }
     handleSliderChange(e, val) {
         this.props.setCurrentFrame(Math.floor(val * this.props.totalFrame));
@@ -81,33 +100,46 @@ export default class Player extends React.Component {
         });
     }
     componentDidUpdate(prevProps) {
-        if (first ||
-            (!_.isEqual(prevProps.cells, this.props.cells)
-             && this.props.playing
-             && this.props.currentFrame + 1 < this.props.totalFrame)) {
+        if (firstChange || (
+            !_.isEqual(prevProps.cells, this.props.cells)
+            && this.props.playing
+            && this.props.currentFrame < this.props.totalFrame - 1)
+           ) {
             setTimeout(() => {
                 if (this.props.playing) {
-                    this.props.setCurrentFrame(this.props.currentFrame + 1);
+                    if (firstChange) {
+                        this.props.setCurrentFrame(this.props.currentFrame - 1);
+                        this.props.setCurrentFrame(this.props.currentFrame + 1);
+                    }
+                    else {
+                        this.props.setCurrentFrame(this.props.currentFrame + 1);
+                    }
                     setTimeout(() => {
-                        this.props.move(this.props.data[this.props.currentFrame + 1].movement);
+                        if (this.props.currentFrame < this.props.totalFrame - 1) {
+                            this.props.moveTiles(this.props.data[this.props.currentFrame + 1].movement);
+                        }
                     }, 300);
                 }
             }, 700);
-            first = false;
+            firstChange = false;
         }
     }
     render() {
+        let { initialized, currentFrame, totalFrame, playing } = this.props;
+        let begin = (currentFrame === 0);
+        let end = (currentFrame >= totalFrame - 1);
+
         return (
             <Paper style={styles.player}>
                 <IconButton
-                    disabled={!this.props.submitted}
-                    onTouchTap={this.handlePrev}
-                    iconClassName="material-icons">
+                    iconClassName="material-icons"
+                    disabled={!this.props.initialized || begin}
+                    onTouchTap={this.handlePrev}>
                     fast_rewind
                 </IconButton>
 
                 <FloatingActionButton
-                    disabled={!this.props.submitted}
+                    disabled={!this.props.initialized || end}
                     onTouchTap={this.handlePlay}
                     mini={true}
                     primary={true}>
@@ -117,40 +149,40 @@ export default class Player extends React.Component {
                 </FloatingActionButton>
 
                 <IconButton
-                    disabled={!this.props.submitted}
-                    onTouchTap={this.handleNext}
-                    iconClassName="material-icons">
+                    iconClassName="material-icons"
+                    disabled={!this.props.initialized || end}
+                    onTouchTap={this.handleNext}>
                     fast_forward
                 </IconButton>
 
                 <div style={styles.sliderContainer}>
                     <Slider
-                        disabled={!this.props.submitted}
+                        style={styles.slider}
+                        disabled={!this.props.initialized}
                         onChange={this.handleSliderChange}
-                        value={this.props.currentFrame/(this.props.totalFrame-1)}
-                        step={1/(this.props.totalFrame-1)}
-                        style={styles.slider} />
+                        value={this.props.currentFrame/(this.props.totalFrame - 1)}
+                        step={1/(this.props.totalFrame - 1)}/>
                 </div>
 
                 <p style={styles.label}>
-                    {this.props.submitted? `${this.props.currentFrame + 1}/${this.props.totalFrame}`: '-/-'}
+                    {this.props.initialized? `${this.props.currentFrame + 1}/${this.props.totalFrame}`: '-/-'}
                 </p>
 
                 <IconButton
                     style={styles.specToggle}
                     iconStyle={styles.specIcon}
-                    tooltip={<p>Show specifications</p>}
+                    iconClassName="material-icons"
+                    tooltip={<p>Game Rules</p>}
                     tooltipPosition="top-right"
-                    onTouchTap={this.handleSpecToggle}
-                    iconClassName="material-icons">
+                    onTouchTap={this.handleSpecToggle}>
                     insert_comment
                 </IconButton>
 
                 <Dialog
                     modal={false}
-                    open={this.state.open}
                     bodyStyle={styles.spec}
                     bodyClassName="markdown-body"
+                    open={this.state.open}
                     onRequestClose={this.handleSpecToggle}>
                     <div dangerouslySetInnerHTML={{
                         __html: marked(spec.message)
@@ -161,3 +193,24 @@ export default class Player extends React.Component {
         );
     }
 }
+
+export default connect (
+    function stateToProps(state) {
+        return {
+            initialized: state.initialized,
+            cells: state.cells,
+            data: state.data,
+            currentFrame: state.currentFrame,
+            totalFrame: state.totalFrame,
+            playing: state.playing
+        };
+    },
+    function dispatchToProps(dispatch) {
+        return {
+            fetchData: () => dispatch(fetchData()),
+            setCurrentFrame: val => dispatch(setCurrentFrame(val)),
+            setPlay: val => dispatch(setPlay(val)),
+            moveTiles: val => dispatch(moveTiles(val))
+        };
+    }
+)(Player);
