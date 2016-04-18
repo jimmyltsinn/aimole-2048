@@ -11,6 +11,9 @@ body {
 img {
   height: 30vh; }
 
+::-webkit-scrollbar {
+  display: none; }
+
 .tile {
   cursor: default;
   width: 15vh;
