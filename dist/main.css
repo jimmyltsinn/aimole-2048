@@ -5,33 +5,14 @@ body {
   align-content: center;
   align-items: center;
   overflow-x: hidden;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Ubuntu';
   margin: 0; }
 
 img {
   height: 30vh; }
 
-::-webkit-scrollbar {
-  display: none; }
-
-.title {
-  order: 2;
-  font-size: 6vh;
-  font-weight: bold; }
-
-.board {
-  width: 68vh;
-  height: 68vh;
-  padding: 1vh;
-  background-color: rgba(230, 230, 230, 0.2);
-  border-radius: 1vh;
-  outline: none;
-  position: relative; }
-
-.board .cell, .tile {
-  cursor: default; }
-
-.cell, .tile {
+.tile {
+  cursor: default;
   width: 15vh;
   height: 15vh;
   margin: 1vh;
@@ -43,7 +24,7 @@ img {
   text-align: center;
   vertical-align: middle;
   border-radius: 1vh;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Ubuntu';
   color: #776E65;
   background-color: rgba(230, 230, 230, 0.1); }
 
