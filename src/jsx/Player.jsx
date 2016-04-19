@@ -120,7 +120,6 @@ class Player extends React.Component {
                     else {
                         this.props.setCurrentFrame(this.props.currentFrame + 1);
                     }
-                    console.log(this.props.data);
                     var frame = this.props.currentFrame + 1;
                     if ((frame % 4) == 0) {
                         sweetScroll.toElement(document.getElementById(`output${frame}`));
