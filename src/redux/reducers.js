@@ -25,7 +25,10 @@ let initialState = {
     totalFrame: 0,
     playing: false,
     record: 0,
-    playerName: ['?']
+    playerName: ['?'],
+    ended: false,
+    firstChange: true,
+    needRestart: false
 };
 
 export default function reducer(prevState, action) {
@@ -34,13 +37,32 @@ export default function reducer(prevState, action) {
     switch(action.type) {
 
         case actions.RECEIVE_DATA:
-            if (action.data.length > 0) {
+            if (action.data && action.data.length > 0) {
                 state.initialized = true;
                 state.data = action.data;
                 state.totalFrame = action.data.length;
-                state.record = action.data[0].players[0].eloScore;
+                if (action.data[0].players && action.data[0].players[0]) {
+                    state.record = action.data[0].players[0].eloScore;
+                    state.playerName = action.data[0].players[0].name;
+                }
+            }
+            return state;
+
+        case actions.RECEIVE_FRAME:
+            if (action.data && action.data.length > 0 && action.data[0].players) {
                 state.playerName = action.data[0].players[0].name;
             }
+            state.initialized = true;
+            state.data.push(action.data);
+            state.totalFrame = state.data.length;
+            if (state.needRestart == true) {
+                state.firstChange = true;
+                state.needRestart = false;
+            }
+            return state;
+
+        case actions.END_STREAM:
+            state.ended = true;
             return state;
 
         case actions.SET_CURRENT_FRAME:
@@ -48,33 +70,46 @@ export default function reducer(prevState, action) {
             if (newFrame <= 0) {
                 newFrame = 0;
             }
-            else if (newFrame > state.totalFrame - 1) {
+            else if (state.ended && newFrame > state.totalFrame - 1) {
                 state.playing = false;
                 newFrame = state.totalFrame - 1;
             }
-            var currentTiles = [];
-            for (var i = 0; i < 4; ++i) {
-                currentTiles.push([]);
-                for (var j = 0; j < 4; ++j) {
-                    if (i == state.data[newFrame].newTile[0]
-                        && j == state.data[newFrame].newTile[1]) {
-                        currentTiles[i][j] = new Tile(state.data[newFrame].board[i][j], i, j, 1);
-                    }
-                    else {
-                        currentTiles[i][j] = new Tile(state.data[newFrame].board[i][j], i, j, 0);
+            else if (!state.ended && newFrame > state.totalFrame - 1) {
+                newFrame = state.currentFrame;
+            }
+            if (state.data.length > 0) {
+                var currentTiles = [];
+                for (var i = 0; i < 4; ++i) {
+                    currentTiles.push([]);
+                    for (var j = 0; j < 4; ++j) {
+                        if (i == state.data[newFrame].newTile[0]
+                            && j == state.data[newFrame].newTile[1]) {
+                            currentTiles[i][j] = new Tile(state.data[newFrame].board[i][j], i, j, 1);
+                        }
+                        else {
+                            currentTiles[i][j] = new Tile(state.data[newFrame].board[i][j], i, j, 0);
+                        }
                     }
                 }
+                state.currentFrame = newFrame;
+                state.cells = state.data[newFrame].board;
+                state.tiles = currentTiles;
+                state.score = state.data[newFrame].score;
+                if (newFrame < state.totalFrame - 1) state.movement = state.data[newFrame + 1].movement;
+                state.mergedTiles = [];
             }
-            state.currentFrame = newFrame;
-            state.cells = state.data[newFrame].board;
-            state.tiles = currentTiles;
-            state.score = state.data[newFrame].score;
-            if (newFrame < state.totalFrame - 1) state.movement = state.data[newFrame + 1].movement;
-            state.mergedTiles = [];
             return state;
 
         case actions.SET_PLAY:
             state.playing = action.data;
+            return state;
+
+        case actions.SET_FIRST_CHANGE:
+            state.firstChange = action.data;
+            return state;
+
+        case actions.SET_NEED_RESTART:
+            state.needRestart = action.data;
             return state;
 
         case actions.MOVE_TILES:

@@ -2,12 +2,19 @@ import React from 'react';
 import _ from 'lodash';
 import $ from 'jquery-browserify';
 import marked from 'marked';
+import SweetScroll from "sweet-scroll";
 
 import {Paper, FloatingActionButton, FontIcon, IconButton, Slider, Dialog} from 'material-ui';
 import spec from './spec.js';
 
 import { connect } from 'react-redux';
-import { fetchData, setCurrentFrame, setPlay, moveTiles } from '../redux/actions.js';
+import { fetchData, startStream, setCurrentFrame, setPlay, setFirstChange, setNeedRestart, moveTiles } from '../redux/actions.js';
+
+const sweetScroll = new SweetScroll({
+    horizontalScroll: true,
+    easing: "linear",
+    duration: 600
+}, "#debugBar");
 
 const styles = {
     player: {
@@ -45,8 +52,6 @@ const styles = {
     }
 };
 
-let firstChange = true;
-
 class Player extends React.Component {
     constructor(props) {
         super(props);
@@ -63,6 +68,7 @@ class Player extends React.Component {
     }
     componentWillMount() {
         this.props.fetchData();
+        this.props.startStream();
         this.props.setPlay(true);
         this.props.setCurrentFrame(this.props.currentFrame);
         setTimeout(() => {
@@ -80,7 +86,7 @@ class Player extends React.Component {
         this.props.setPlay(false);
     }
     handlePlay() {
-        firstChange = true;
+        this.props.setFirstChange(true);
         this.props.setPlay(!this.props.playing);
         setTimeout(() => {
             if (this.props.currentFrame < this.props.totalFrame - 1) {
@@ -100,19 +106,24 @@ class Player extends React.Component {
         });
     }
     componentDidUpdate(prevProps) {
-        if (firstChange || (
-            !_.isEqual(prevProps.cells, this.props.cells)
+        if ((this.props.firstChange || !_.isEqual(prevProps.cells, this.props.cells))
             && this.props.playing
-            && this.props.currentFrame < this.props.totalFrame - 1)
+            && this.props.currentFrame < this.props.totalFrame - 1
            ) {
+            this.props.setNeedRestart(false);
             setTimeout(() => {
                 if (this.props.playing) {
-                    if (firstChange) {
+                    if (this.props.firstChange) {
                         this.props.setCurrentFrame(this.props.currentFrame - 1);
                         this.props.setCurrentFrame(this.props.currentFrame + 1);
                     }
                     else {
                         this.props.setCurrentFrame(this.props.currentFrame + 1);
+                    }
+                    console.log(this.props.data);
+                    var frame = this.props.currentFrame + 1;
+                    if ((frame % 4) == 0) {
+                        sweetScroll.toElement(document.getElementById(`output${frame}`));
                     }
                     setTimeout(() => {
                         if (this.props.currentFrame < this.props.totalFrame - 1) {
@@ -121,19 +132,21 @@ class Player extends React.Component {
                     }, 300);
                 }
             }, 700);
-            firstChange = false;
+            this.props.setFirstChange(false);
+        }
+        else if (!this.props.ended && this.currentFrame >= this.totalFrame - 1) {
+            this.props.setNeedRestart(true);
         }
     }
     render() {
-        let { initialized, currentFrame, totalFrame, playing } = this.props;
-        let begin = (currentFrame === 0);
-        let end = (currentFrame >= totalFrame - 1);
+        let begin = (this.props.currentFrame === 0);
+        let end = (this.props.currentFrame >= this.props.totalFrame - 1);
 
         return (
             <Paper style={styles.player}>
                 <IconButton
                     iconClassName="material-icons"
-                    disabled={!this.props.initialized || begin}
+                    disabled={!this.props.initialized || begin || !this.props.ended}
                     onTouchTap={this.handlePrev}>
                     fast_rewind
                 </IconButton>
@@ -150,7 +163,7 @@ class Player extends React.Component {
 
                 <IconButton
                     iconClassName="material-icons"
-                    disabled={!this.props.initialized || end}
+                    disabled={!this.props.initialized || !this.props.ended}
                     onTouchTap={this.handleNext}>
                     fast_forward
                 </IconButton>
@@ -158,7 +171,7 @@ class Player extends React.Component {
                 <div style={styles.sliderContainer}>
                     <Slider
                         style={styles.slider}
-                        disabled={!this.props.initialized}
+                        disabled={!this.props.initialized || !this.props.ended}
                         onChange={this.handleSliderChange}
                         value={this.props.currentFrame/(this.props.totalFrame - 1)}
                         step={1/(this.props.totalFrame - 1)}/>
@@ -202,14 +215,19 @@ export default connect (
             data: state.data,
             currentFrame: state.currentFrame,
             totalFrame: state.totalFrame,
-            playing: state.playing
+            playing: state.playing,
+            ended: state.ended,
+            firstChange: state.firstChange
         };
     },
     function dispatchToProps(dispatch) {
         return {
             fetchData: () => dispatch(fetchData()),
+            startStream: () => dispatch(startStream()),
             setCurrentFrame: val => dispatch(setCurrentFrame(val)),
             setPlay: val => dispatch(setPlay(val)),
+            setFirstChange: val => dispatch(setFirstChange(val)),
+            setNeedRestart: val => dispatch(setNeedRestart(val)),
             moveTiles: val => dispatch(moveTiles(val))
         };
     }

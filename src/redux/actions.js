@@ -1,10 +1,30 @@
+let { aimole, display } = require('../aimole.js');
+
 export const RECEIVE_DATA = 'action: receive data';
 const receiveData = data => ({ type: RECEIVE_DATA, data });
 
 export const fetchData = () => {
-    let data = window.aimole.display && window.aimole.display.length > 0 ? window.aimole.display: [];
+    let data = display && display.length > 0 ? display: [];
     return function(dispatch) {
         dispatch(receiveData(data));
+    };
+};
+
+export const RECEIVE_FRAME = 'actions: receive frame';
+const receiveFrame = data => ({ type: RECEIVE_FRAME, data });
+
+export const END_STREAM = 'actions: end streaming';
+const endStream = () => ({ type: END_STREAM });
+
+export const startStream = () => {
+    return function(dispatch) {
+        console.log(aimole);
+        aimole.on('display', e => {
+            dispatch(receiveFrame(e));
+        });
+        aimole.on('end', e => {
+            dispatch(endStream());
+        });
     };
 };
 
@@ -13,6 +33,12 @@ export const setCurrentFrame = data => ({ type: SET_CURRENT_FRAME, data });
 
 export const SET_PLAY = 'action: set play';
 export const setPlay = data => ({ type: SET_PLAY, data });
+
+export const SET_FIRST_CHANGE = 'action: set first change';
+export const setFirstChange = data => ({ type: SET_FIRST_CHANGE, data });
+
+export const SET_NEED_RESTART = 'action: set need restart';
+export const setNeedRestart = data => ({ type: SET_NEED_RESTART, data });
 
 export const MOVE_TILES = 'action: move tiles';
 export const moveTiles = data => ({ type: MOVE_TILES, data });
