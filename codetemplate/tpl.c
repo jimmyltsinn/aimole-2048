@@ -9,23 +9,22 @@
  * If you are not clear about the rules, click the "Game Rules" button on the player bar.
  */
 
-int isValid(char move[5], int board[4][4]) {
+int isValid(int board[4][4], char move[5]) {
     // Check If the Move is Valid
     // Implement Your Checking Function
     return 1;
 }
 
-char* nextMove(int board[4][4]) {
+void nextMove(int board[4][4], char move[5]) {
     // Implement Your AI Here
-    char move[5];
-    if (isValid("UP", board) == 1) {
-        strcpy(move, 'UP');
+    if (isValid(board, "UP") == 1) {
+        strcpy(move, "UP");
     }
-    return move;
 }
 
 int main() {
     int board[4][4], i, j;
+    char move[5];
 
     // Read Game Board
     for (i = 0; i < 4; i++) {
@@ -34,7 +33,10 @@ int main() {
         }
     }
 
+    // Compute Your Next Move
+    nextMove(board, move);
+
     // Print Your Next Move to the Standard Output
-    printf("%s\n", nextMove(board));
+    printf("%s\n", move);
     return 0;
 }
