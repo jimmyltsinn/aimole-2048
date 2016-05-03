@@ -18,12 +18,36 @@ const endStream = () => ({ type: END_STREAM });
 
 export const startStream = () => {
     return function(dispatch) {
-        console.log(aimole);
         aimole.on('display', e => {
             dispatch(receiveFrame(e));
         });
         aimole.on('end', e => {
             dispatch(endStream());
+        });
+    };
+};
+
+export const QUEUEING = 'actions: queueing';
+const queueing = () => ({ type: QUEUEING});
+
+export const queueingStream = () => {
+    // console.log("queueingStream");
+    return function(dispatch) {
+        // console.log("queueingStream dispatch");
+        aimole.on('queueing', e => {
+            // console.log("action receive queueingStream");
+            dispatch(queueing());
+        });
+    };
+};
+
+export const ERR = 'actions: err';
+const err = data => ({ type: ERR, data });
+
+export const errStream = () => {
+    return function(dispatch) {
+        aimole.on('err', e => {
+            dispatch(err(e));
         });
     };
 };

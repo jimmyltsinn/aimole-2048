@@ -8,7 +8,7 @@ import {Paper, FloatingActionButton, FontIcon, IconButton, Slider, Dialog} from 
 import spec from './spec.js';
 
 import { connect } from 'react-redux';
-import { fetchData, startStream, setCurrentFrame, setPlay, setFirstChange, setNeedRestart, moveTiles } from '../redux/actions.js';
+import { fetchData, startStream, setCurrentFrame, setPlay, setFirstChange, setNeedRestart, moveTiles, queueingStream, errStream } from '../redux/actions.js';
 
 const sweetScroll = new SweetScroll({
     horizontalScroll: true,
@@ -69,6 +69,8 @@ class Player extends React.Component {
     componentWillMount() {
         this.props.fetchData();
         this.props.startStream();
+        this.props.queueingStream();
+        this.props.errStream();
         this.props.setPlay(true);
         this.props.setCurrentFrame(this.props.currentFrame);
         setTimeout(() => {
@@ -78,10 +80,14 @@ class Player extends React.Component {
         }, 300);
     }
     handlePrev() {
+        var frame = Math.floor(this.props.currentFrame - 1);
+        sweetScroll.toElement(document.getElementById(`output${frame}`));
         this.props.setCurrentFrame(this.props.currentFrame - 1);
         this.props.setPlay(false);
     }
     handleNext() {
+        var frame = Math.floor(this.props.currentFrame + 1);
+        sweetScroll.toElement(document.getElementById(`output${frame}`));
         this.props.setCurrentFrame(this.props.currentFrame + 1);
         this.props.setPlay(false);
     }
@@ -95,6 +101,8 @@ class Player extends React.Component {
         }, 300);
     }
     handleSliderChange(e, val) {
+        var frame = Math.floor(val * this.props.totalFrame);
+        sweetScroll.toElement(document.getElementById(`output${frame}`));
         this.props.setCurrentFrame(Math.floor(val * this.props.totalFrame));
         this.props.setPlay(false);
     }
@@ -110,6 +118,7 @@ class Player extends React.Component {
             && this.props.playing
             && this.props.currentFrame < this.props.totalFrame - 1
            ) {
+            // console.log("Frame: " + this.props.currentFrame + 1);
             this.props.setNeedRestart(false);
             setTimeout(() => {
                 if (this.props.playing) {
@@ -135,6 +144,7 @@ class Player extends React.Component {
         }
         else if (!this.props.ended && this.currentFrame >= this.totalFrame - 1) {
             this.props.setNeedRestart(true);
+            // console.log("setNeedRestart");
         }
     }
     render() {
@@ -185,7 +195,7 @@ class Player extends React.Component {
                     iconStyle={styles.specIcon}
                     iconClassName="material-icons"
                     tooltip={<p>Game Rules</p>}
-                    tooltipPosition="top-right"
+                    tooltipPosition="top-left"
                     onTouchTap={this.handleSpecToggle}>
                     insert_comment
                 </IconButton>
@@ -227,7 +237,9 @@ export default connect (
             setPlay: val => dispatch(setPlay(val)),
             setFirstChange: val => dispatch(setFirstChange(val)),
             setNeedRestart: val => dispatch(setNeedRestart(val)),
-            moveTiles: val => dispatch(moveTiles(val))
+            moveTiles: val => dispatch(moveTiles(val)),
+            queueingStream: val => dispatch(queueingStream(val)),
+            errStream: val => dispatch(errStream(val))
         };
     }
 )(Player);

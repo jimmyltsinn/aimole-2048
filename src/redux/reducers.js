@@ -28,7 +28,9 @@ let initialState = {
     playerName: ['?'],
     ended: false,
     firstChange: true,
-    needRestart: false
+    needRestart: false,
+    hasSenderMessage: false,
+    senderMessage: ""
 };
 
 export default function reducer(prevState, action) {
@@ -38,6 +40,8 @@ export default function reducer(prevState, action) {
 
         case actions.RECEIVE_DATA:
             if (action.data && action.data.length > 0) {
+                state.senderMessage = "";
+                state.hasSenderMessage = false;
                 state.initialized = true;
                 state.data = action.data;
                 state.totalFrame = action.data.length;
@@ -45,15 +49,19 @@ export default function reducer(prevState, action) {
                     state.record = action.data[0].players[0].eloScore;
                     state.playerName = action.data[0].players[0].name;
                 }
+                state.ended = true;
             }
             return state;
 
         case actions.RECEIVE_FRAME:
-            if (action.data && action.data.length > 0 && action.data[0].players) {
-                state.playerName = action.data[0].players[0].name;
-            }
+            state.senderMessage = "";
+            state.hasSenderMessage = false;
             state.initialized = true;
             state.data.push(action.data);
+            if (state.data && state.data.length > 0 && state.data[0].players) {
+                state.playerName = state.data[0].players[0].name;
+                state.record = state.data[0].players[0].eloScore;
+            }
             state.totalFrame = state.data.length;
             if (state.needRestart == true) {
                 state.firstChange = true;
@@ -63,6 +71,19 @@ export default function reducer(prevState, action) {
 
         case actions.END_STREAM:
             state.ended = true;
+            return state;
+
+        case actions.QUEUEING:
+            // console.log("reducer receive queueingStream");
+            state.senderMessage = "Game is Running. Please Wait a Second!";
+            state.hasSenderMessage = true;
+            // console.log(state.senderMessage);
+            return state;
+
+        case actions.ERR:
+            // console.log("err");
+            state.senderMessage = "Error! Please Submit Again.";
+            state.hasSenderMessage = true;
             return state;
 
         case actions.SET_CURRENT_FRAME:
