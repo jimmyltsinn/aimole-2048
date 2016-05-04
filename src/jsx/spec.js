@@ -13,7 +13,8 @@ Every turn, a new tile with a **value 2** will randomly appear in an empty spot 
 Tiles slide as far as possible in the chosen direction until they are stopped by either another tile or the edge of the grid.
 
 ## Language ##
-Your program should be written in **C**.
+Your program can be written in **C**, **Python**, **Javascript** or **Ruby**.
+You can switch the mode of editor.
 
 ## Standard Input ##
 You program will receive the input data in each turn.
