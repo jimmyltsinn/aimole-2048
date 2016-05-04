@@ -25,18 +25,19 @@ void nextMove(int board[4][4], char move[5]) {
 int main() {
     int board[4][4], i, j;
     char move[5];
-
-    // Read Game Board
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 4; j++) {
-            scanf("%d", &board[i][j]);
+    while (1) {
+        // Read Game Board
+        for (i = 0; i < 4; i++) {
+            for (j = 0; j < 4; j++) {
+                scanf("%d", &board[i][j]);
+            }
         }
+
+        // Compute Your Next Move
+        nextMove(board, move);
+
+        // Print Your Next Move to the Standard Output
+        printf("%s\n", move);
     }
-
-    // Compute Your Next Move
-    nextMove(board, move);
-
-    // Print Your Next Move to the Standard Output
-    printf("%s\n", move);
     return 0;
 }
