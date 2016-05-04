@@ -38,7 +38,7 @@ class Message extends React.Component {
                     mes = "Your program has some unknown error.";
                     break;
                 case 'invalid':
-                    mes = "You made an invalid move, or there is still a valid move but you didn't make a move";
+                    mes = "You made an invalid move.";
                     break;
                 default:
                     mes = "Good Job! You got score " + nextProps.score;

@@ -63,6 +63,9 @@ export default function reducer(prevState, action) {
                 state.record = state.data[0].players[0].eloScore;
             }
             state.totalFrame = state.data.length;
+            if (state.needRestart == false && !state.ended && state.currentFrame >= state.totalFrame - 1) {
+                state.needRestart = true;
+            }
             if (state.needRestart == true) {
                 state.firstChange = true;
                 state.needRestart = false;
@@ -103,7 +106,8 @@ export default function reducer(prevState, action) {
                 for (var i = 0; i < 4; ++i) {
                     currentTiles.push([]);
                     for (var j = 0; j < 4; ++j) {
-                        if (i == state.data[newFrame].newTile[0]
+                        if (state.data[newFrame].newTile
+                            && i == state.data[newFrame].newTile[0]
                             && j == state.data[newFrame].newTile[1]) {
                             currentTiles[i][j] = new Tile(state.data[newFrame].board[i][j], i, j, 1);
                         }

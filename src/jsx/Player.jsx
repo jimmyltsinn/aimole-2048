@@ -120,6 +120,7 @@ class Player extends React.Component {
            ) {
             // console.log("Frame: " + this.props.currentFrame + 1);
             this.props.setNeedRestart(false);
+
             setTimeout(() => {
                 if (this.props.playing) {
                     if (this.props.firstChange) {
@@ -133,14 +134,17 @@ class Player extends React.Component {
                     if ((frame % 4) == 0) {
                         sweetScroll.toElement(document.getElementById(`output${frame}`));
                     }
-                    setTimeout(() => {
-                        if (this.props.currentFrame < this.props.totalFrame - 1) {
-                            this.props.moveTiles(this.props.data[this.props.currentFrame + 1].movement);
-                        }
-                    }, 300);
+                    if (this.props.data[this.props.currentFrame + 1] && this.props.data[this.props.currentFrame + 1].message == 'player') {
+                        setTimeout(() => {
+                            if (this.props.currentFrame < this.props.totalFrame - 1) {
+                                this.props.moveTiles(this.props.data[this.props.currentFrame + 1].movement);
+                            }
+                        }, 300);
+                    }
                 }
             }, 700);
             this.props.setFirstChange(false);
+
         }
         else if (!this.props.ended && this.currentFrame >= this.totalFrame - 1) {
             this.props.setNeedRestart(true);
