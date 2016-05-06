@@ -2,26 +2,40 @@ import React from 'react';
 import $ from 'jquery-browserify';
 import { FontIcon } from 'material-ui';
 
+import { connect } from 'react-redux';
+
 const styles = {
     output: {
-        width: '22vh',
         marginRight: '40px',
         display: 'flex',
         alignItems: 'center'
     },
-    text: {
+    img: {
+        verticalAlign: 'text-top'
+    }
+}
+
+const getColor = (frame, currentFrame) => {
+    var text = {
+        width: '10vw',
         fontSize: '3vh',
         color: 'white',
         fontWeight: 'lighter',
         Align: 'center',
         textShadow: '0 3px 6px rgba(0,0,0,0.16)',
         whiteSpace: 'nowrap'
+    };
+
+    if (frame == currentFrame) {
+        text.textShadow = '0 4px 10px #ffff99',
+        text.color = '#ffff00'
     }
+    return text;
 }
 
-export default class OutputView extends React.Component {
+class OutputView extends React.Component {
     render() {
-        let output = "";
+        let output = "help_outline";
         if (this.props.output == 0) {
             output = "arrow_back";
         }
@@ -36,11 +50,19 @@ export default class OutputView extends React.Component {
         }
         let frame = this.props.number;
         return (
-            <div ref={`output${frame}`} style={styles.output}>
-                <div style={styles.text}>
-                    {this.props.number} :  <i className="material-icons">{output}</i>
+            <div id={`output${frame}`} style={styles.output}>
+                <div style={getColor(frame, this.props.currentFrame + 1)}>
+                    {frame} : <i className="material-icons" style={styles.img}>{output}</i>
                 </div>
             </div>
         )
     }
 }
+
+export default connect (
+    function stateToProps(state) {
+        return {
+            currentFrame: state.currentFrame
+        };
+    }
+)(OutputView);

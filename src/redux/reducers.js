@@ -78,7 +78,7 @@ export default function reducer(prevState, action) {
 
         case actions.QUEUEING:
             // console.log("reducer receive queueingStream");
-            state.senderMessage = "Game is Running. Please Wait a Second!";
+            state.senderMessage = "Almost your turn to run! Please wait a second!";
             state.hasSenderMessage = true;
             // console.log(state.senderMessage);
             return state;
