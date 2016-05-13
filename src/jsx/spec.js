@@ -39,6 +39,8 @@ Similarly, output \`DOWN\`, \`LEFT\`, \`RIGHT\` to move tiles down, to left or t
 
 ## Time Limit ##
 Your program should give the output within **800ms** per turn.
+The limit of total run time is **2 minutes**.
+Therefore, you are challenged to make good decision as fast as possible in order to survive till 2 minutes and achieve higher score.
 
 Have Fun :)
 ===========
