@@ -24,9 +24,10 @@ class Message extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        // console.log("Frame: " + nextProps.currentFrame + " Message: " + nextProps.verdictMessage);
         if (nextProps.ended && nextProps.currentFrame == nextProps.totalFrame - 1) {
             var mes = "";
-            // console.log(nextProps.verdictMessage + "This Should Be Displayed");
+            // console.log("Message: " + nextProps.verdictMessage + "!!!!!!!!!!!!!!!!!!!!!");
             switch(nextProps.verdictMessage) {
                 case 'terminated':
                     mes = "Your program terminated abnormally";
@@ -40,8 +41,11 @@ class Message extends React.Component {
                 case 'invalid':
                     mes = "You made an invalid move.";
                     break;
+                case 'ttle':
+                    mes = "Total run time(2 minutes) is up. You got score " + nextProps.score;
+                    break;
                 default:
-                    mes = "Good Job! You got score " + nextProps.score;
+                    mes = "Good Job! You got score " + nextProps.score + ". The total run time you spent: " + nextProps.totalTime + " ms.";
             }
             this.setState({ show: true, message:  mes });
         }
@@ -62,7 +66,7 @@ class Message extends React.Component {
             <Dialog
                 modal={false}
                 actions={actions}
-                open={this.props.initialized ? this.state.show : this.props.hasSenderMessage}
+                open={this.state.show || this.props.hasSenderMessage}
                 onRequestClose={() => {this.setState({show: false});}}>
                 <h1 style={styles.error}>
                     {this.props.hasSenderMessage ? this.props.senderMessage : this.state.message}
@@ -83,7 +87,8 @@ export default connect (
                 verdictMessage: state.data[state.currentFrame].message,
                 score: state.score,
                 senderMessage: state.senderMessage,
-                hasSenderMessage: state.hasSenderMessage
+                hasSenderMessage: state.hasSenderMessage,
+                totalTime: state.data[state.currentFrame].totalTime
             };
         else
             return {
