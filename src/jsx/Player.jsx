@@ -38,7 +38,7 @@ const styles = {
         color: 'grey'
     },
     specToggle: {
-        margin: '0 0 0 40px'
+        margin: '0 0 0 50px'
     },
     specIcon: {
         color: 'grey'
@@ -120,7 +120,7 @@ class Player extends React.Component {
            ) {
             // console.log("Frame: " + this.props.currentFrame + 1);
             this.props.setNeedRestart(false);
-
+            // console.log(this.props.data);
             setTimeout(() => {
                 if (this.props.playing) {
                     if (this.props.firstChange) {
@@ -184,7 +184,7 @@ class Player extends React.Component {
                 <div style={styles.sliderContainer}>
                     <Slider
                         style={styles.slider}
-                        disabled={!this.props.initialized || !this.props.ended}
+                        disabled={!this.props.initialized}
                         onChange={this.handleSliderChange}
                         value={this.props.currentFrame/(this.props.totalFrame - 1)}
                         step={1/(this.props.totalFrame - 1)}/>
