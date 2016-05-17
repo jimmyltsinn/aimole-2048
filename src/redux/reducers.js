@@ -25,6 +25,7 @@ let initialState = {
     totalFrame: 0,
     playing: false,
     record: 0,
+    totalTime: 0,
     playerName: ['?'],
     ended: false,
     firstChange: true,
@@ -120,6 +121,7 @@ export default function reducer(prevState, action) {
                 state.cells = state.data[newFrame].board;
                 state.tiles = currentTiles;
                 state.score = state.data[newFrame].score;
+                state.totalTime = state.data[newFrame].totalTime;
                 if (newFrame < state.totalFrame - 1) state.movement = state.data[newFrame + 1].movement;
                 state.mergedTiles = [];
             }

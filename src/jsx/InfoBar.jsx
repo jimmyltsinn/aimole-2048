@@ -32,14 +32,15 @@ class InfoBar extends React.Component {
         return (
             <div style={styles.infoBar}>
                 <div style={styles.playerSection}>
-                    <div style={styles.text}>Player: {this.props.playerName}</div>
+                    <div style={styles.text}>Player: <br/>{this.props.playerName}</div>
                 </div>
                 <div style={styles.section}>
-                    <div style={styles.text}>Score: {this.props.score}</div>
+                    <div style={styles.text}>Score: <br/>{this.props.score}</div>
                 </div>
                 <div style={styles.section}>
-                    <div style={styles.text}>Best: {this.props.record}</div>
+                    <div style={styles.text}>Elapsed: <br/>{this.props.totalTime/1000} s</div>
                 </div>
+
             </div>
         );
     }
@@ -50,6 +51,7 @@ export default connect (
         return {
             score: state.score,
             record: state.record,
+            totalTime: state.totalTime,
             playerName: state.playerName
         };
     }
