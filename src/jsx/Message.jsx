@@ -33,7 +33,7 @@ class Message extends React.Component {
                     mes = "Your program terminated abnormally";
                     break;
                 case 'timeout':
-                    mes = "Timeout! Your program spent too much time on a move. The time limit is 0.8s.";
+                    mes = "Timeout! Your program spent too much time on a move. The time limit for each move is 2s.";
                     break;
                 case 'error':
                     mes = "Your program has some unknown error.";

@@ -18,7 +18,7 @@ const sweetScroll = new SweetScroll({
 
 const styles = {
     player: {
-        padding: '5px',
+        padding: '3px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
@@ -159,7 +159,7 @@ class Player extends React.Component {
             <Paper style={styles.player}>
                 <IconButton
                     iconClassName="material-icons"
-                    disabled={!this.props.initialized || begin || !this.props.ended}
+                    disabled={!this.props.initialized || begin}
                     onTouchTap={this.handlePrev}>
                     fast_rewind
                 </IconButton>
@@ -176,7 +176,7 @@ class Player extends React.Component {
 
                 <IconButton
                     iconClassName="material-icons"
-                    disabled={!this.props.initialized || !this.props.ended}
+                    disabled={!this.props.initialized || end}
                     onTouchTap={this.handleNext}>
                     fast_forward
                 </IconButton>

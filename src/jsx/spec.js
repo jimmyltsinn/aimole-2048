@@ -38,7 +38,7 @@ For example, you may write \`printf("UP\\n");\` in C.
 Similarly, output \`DOWN\`, \`LEFT\`, \`RIGHT\` to move tiles down, to left or to right respectively.
 
 ## Time Limit ##
-Your program should give the output within **800ms** per turn.
+Your program should give the output within **2s** per turn.
 The limit of total run time is **2 minutes**.
 Therefore, you are challenged to make good decision as fast as possible in order to survive till 2 minutes and achieve higher score.
 
