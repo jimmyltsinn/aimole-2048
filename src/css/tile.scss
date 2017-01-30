@@ -1,0 +1,38 @@
+@for $fromRow from 0 through 3 {
+    @for $toRow from 0 through 3 {
+        $name: row_from_#{$fromRow}_to_#{$toRow};
+
+        @if $fromRow == $toRow {
+            .row_from_#{$fromRow}_to_#{$toRow} {
+                top: (17 * $toRow + 1) + vh; }
+        } @else {
+            .row_from_#{$fromRow}_to_#{$toRow} {
+                animation-duration: 0.25s;
+                animation-name: $name;
+                animation-fill-mode: forwards; }
+
+            @keyframes ($name) {
+                from {top: (17 * $fromRow + 1) + vh; }
+                to {top: (17 * $toRow + 1) + vh; } }
+        }
+    }
+}
+@for $fromColumn from 0 through 3 {
+    @for $toColumn from 0 through 3 {
+        $name: col_from_#{$fromColumn}_to_#{$toColumn};
+
+        @if $fromColumn == $toColumn {
+            .col_from_#{$fromColumn}_to_#{$toColumn} {
+                left: (17 * $toColumn + 1) + vh; }
+        } @else {
+            .col_from_#{$fromColumn}_to_#{$toColumn} {
+                animation-duration: 0.25s;
+                animation-name: $name;
+                animation-fill-mode: forwards; }
+
+            @keyframes ($name) {
+                from {left: (17 * $fromColumn + 1) + vh; }
+                to {left: (17 * $toColumn + 1) + vh; } }
+        }
+    }
+}
